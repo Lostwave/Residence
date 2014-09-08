@@ -17,17 +17,18 @@ The changes from residence:
 		Can only be created by Me (permissions based)
 		No limit on size.  
 		All the set/gset/pset rules can be set.
-		New rule called create, that only applies to this type of residence.
+		New flag called create, that only applies to this type of residence (or it can reuse the subzone flag).
 			/res gset guest create t
+			Can also be handled in the global config to say a user can create anywhere.
 		BUT, it will be different than residence in that:
 			It is not a residence, its just a zone saying what can happen in it.  
 			The residences users create must be within a zone, but are treated like root residences not subzones.
-			So I would create a huge residence called "North" and /res gset guest create t
+			So I would create a huge residence called "North" and /res gset guest create t and whatever other defaults
 	There are two ways to create a residence
 		Permission based, users have to have a permission to claim using either method.
 		1. Using residence methods (moderators etc)
 		2. Using grief prevention methods (cits/guests etc)
-			Users can only create a residence in a server zone that has the create permission for them or their group
+			Users can only create a residence in a server zone that has the create flag for them or their group
 			These residences are /res select vert also
 			Users place a chest in a zone and a res is automatically created if there is space.
 			If they try to create a residence where there isn't space (due to below rules)
