@@ -4,6 +4,7 @@ Look at GriefPrevention to see some help with how he did things.
 https://github.com/ryanhamshire/GriefPrevention
 
 The goal here is to get rid of grief prevention but make it very easy for admins and users alike to protect land.	
+Ideally put most all code into new files, so we can more easily merge with any changes bkvon makes.
 
 Everywhere below there is an X or Y etc, means its configurable at a server level as well as a permission level.
 	i.e. Server default for residence size is 100.
