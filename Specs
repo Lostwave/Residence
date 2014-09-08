@@ -1,0 +1,72 @@
+Start with residence's code.
+https://github.com/bekvon/Residence
+Look at GriefPrevention to see some help with how he did things.
+https://github.com/ryanhamshire/GriefPrevention
+
+The goal here is to get rid of grief prevention but make it very easy for admins and users alike to protect land.	
+
+Everywhere below there is an X or Y etc, means its configurable at a server level as well as a permission level.
+	i.e. Server default for residence size is 100.
+	Guests has a default residence size of 25.
+	All residences created by Guests will be 25
+	All residences created by anyone else will be 100
+	
+
+The changes from residence:
+	There is a special kind of residence (called a zone for the sake of this doc).
+		Can only be created by Me (permissions based)
+		No limit on size.  
+		All the set/gset/pset rules can be set.
+		New rule called create, that only applies to this type of residence.
+			/res gset guest create t
+		BUT, it will be different than residence in that:
+			It is not a residence, its just a zone saying what can happen in it.  
+			The residences users create must be within a zone, but are treated like root residences not subzones.
+			So I would create a huge residence called "North" and /res gset guest create t
+	There are two ways to create a residence
+		Permission based, users have to have a permission to claim using either method.
+		1. Using residence methods (moderators etc)
+		2. Using grief prevention methods (cits/guests etc)
+			Users can only create a residence in a server zone that has the create permission for them or their group
+			These residences are /res select vert also
+			Users place a chest in a zone and a res is automatically created if there is space.
+			If they try to create a residence where there isn't space (due to below rules)
+				They are given a message which explains the issue, and says type /res findland (or similar)
+				When they type /res findland they are teleported to the nearest available land within the same zone
+					Will require complicated calculation
+	Users cannot create a residence within X blocks of another claim in any direction
+	Users of each level can have X claims
+	Users residence size is X blocks in each direction from center (like grief prevention)
+		You will need to save the center location as well as the other two corners for growing purposes
+	User can see outline of their claim using a tool (like grief prevention), but they cannot change it.
+	Users earn X number of blocks per Y minutes of being on the server
+		1 block of growth is huge, as it grows in each direction.
+	Unlike GP it grows automatically each time they log off
+		It grows by the number of blocks they have earned
+		If they haven't earned enough to grow yet, save how many they have earned for next time.
+		If their residence bumps into another residence it stops growing in that direction, no wrapping around residences.
+	All residence set/pset/gset commands for for people in their own residence.
+		Add a "trust" command which allows a player to let another player have all permissions on that res 
+			except to change any settings.
+		Add a "partner" command which allows a player to let another player have full control of the res.
+			Like being owner
+	Allow residences to be abandoned or gifted to others.
+	Residences automatically get scrubbed if the user hasn't logged on in X days.
+		If a player rents out his residence, either player can log on to keep it from being scrubbed
+		Scrub job should run once a day.
+		Scrubbed residences still exist and are protected, but can be claimed by others.
+		When a res is scrubbed and a player enters it:
+			If they have the "occupy" permission
+			A special notice comes up saying they can become a squatter of the land by typing /res occupy.
+			A squatter has a waiting period of X days before they will own the land.
+			During the waiting period:
+				They must visit the property each day to make it count.
+				So if they occupy it and the waiting period is 20 days:
+					And they visit it every other day, it will take 40 days to own it completely.
+				If they don't visit the property within Y days someone else can /res occupy and take over the squat
+					Causes waiting period to reset, its as if the first person never squatted.
+				A squatter cannot "build" on the property (unless they already have the permission from a set/gset/pset)
+				They can "use" and "container" things.
+				They cannot change any permissions on the property
+			Properties earned by squatting have a setting associated with it as well as previous owners names.
+			Properties earned by squatting don't count towards the total residences allowed.
